@@ -1,0 +1,9 @@
+*.DS_Store
+passenger.3000.pid
+volumes/bundler
+*pid
+.idea/*
+.DS_Store
+log/*log
+*~
+Gemfile.lock

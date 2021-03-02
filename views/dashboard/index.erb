@@ -1,0 +1,391 @@
+<!-- 3 column wrapper -->
+<div id="app" class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
+  <!-- Left sidebar & main wrapper -->
+  <div class="flex-1 min-w-0 bg-white xl:flex">
+    <!-- Account profile -->
+    <div class="xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+      <div class="pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+        <div class="flex items-center justify-between">
+          <div class="flex-1 space-y-8">
+            <div class="space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center xl:block xl:space-y-8">
+              <!-- Profile -->
+              <div class="flex items-center space-x-3">
+                <div class="flex-shrink-0 h-12 w-12">
+                  <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixqx=UrPZUlZFp8&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80" alt="">
+                </div>
+                <div class="space-y-1">
+                  <div class="text-sm font-medium text-gray-900"><%=@current_user.first_name%> <%=@current_user.last_name%></div>
+                  <a href="#" class="group flex items-center space-x-2.5">
+                    <span class="text-sm text-gray-500 group-hover:text-gray-900 font-medium">Pro Member</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Meta info -->
+            <div class="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
+              <div class="flex items-center space-x-2">
+                <!-- Heroicon name: solid/badge-check -->
+                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm text-gray-500 font-medium">Trial 3 days left</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <!-- Heroicon name: solid/collection -->
+                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                </svg>
+                <span class="text-sm text-gray-500 font-medium">Next billing date: 03/21/21</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Projects List -->
+    <div class="bg-white lg:min-w-0 lg:flex-1">
+      <div class="pl-4 pr-6 pt-4 pb-4 border-b border-t border-gray-200 sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-6 xl:border-t-0">
+        <div class="flex items-center">
+          <h1 class="flex-1 text-lg font-medium">Glance Items</h1>
+          <div class="relative">
+            <button @click="handleAdd()" id="sort-menu" type="button" class="w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="false">
+              Add Item +
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="relative z-0 divide-y divide-gray-200 border-b border-gray-200">
+        <li v-for="post in posts" class="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+          <div class="cursor-pointer flex items-center justify-between space-x-4">
+            <!-- Repo name and link -->
+            <div @click="handleEdit(post)" class="min-w-0 space-y-3">
+              <div class="flex items-center space-x-3">
+                <span class="h-4 w-4 bg-green-100 rounded-full flex items-center justify-center" aria-hidden="true">
+                  <span class="h-2 w-2 bg-green-400 rounded-full"></span>
+                </span>
+                <span class="block">
+                  <h2 class="text-sm font-medium">
+                    <a href="#">
+                      <span class="absolute inset-0" aria-hidden="true"></span>
+                      {{post.title}}
+                    </a>
+                  </h2>
+                </span>
+              </div>
+              <a href="#" class="relative group flex items-center space-x-2.5">
+                <svg class="flex-shrink-0 w-4 h-4 text-gray-400 group-hover:text-gray-500"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                <span class="text-sm text-gray-500 group-hover:text-gray-900 font-medium truncate">
+                  {{post.link}}
+                </span>
+              </a>
+            </div>
+            <div class="sm:hidden">
+              <!-- Heroicon name: solid/chevron-right -->
+              <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <!-- Repo meta info -->
+            <div class="hidden sm:flex flex-col flex-shrink-0 items-end space-y-3">
+              <p class="flex text-gray-500 text-sm space-x-2">
+                <!-- This example requires Tailwind CSS v2.0+ -->
+                <button type="button" class="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-pressed="false">
+                  <span aria-hidden="true" class="pointer-events-none absolute bg-white w-full h-full rounded-md"></span>
+                  <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+                  <span aria-hidden="true" class="bg-indigo-600 bg-gray-200 pointer-events-none absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200"></span>
+                  <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                  <span aria-hidden="true" class="translate-x-5 pointer-events-none absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full bg-white shadow transform ring-0 transition-transform ease-in-out duration-200"></span>
+                </button>
+              </p>
+            </div>
+          </div>
+        </li>
+        <!-- More items... -->
+      </ul>
+    </div>
+  </div>
+  <!-- Activity feed -->
+  <div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
+    <div class="pl-6 lg:w-80">
+      <div class="pt-2 pb-4">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="bg-white shadow sm:rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="renew-subscription-label">
+              Ready to go live?
+            </h3>
+            <div class="mt-2 sm:flex sm:items-start sm:justify-between">
+              <div class="max-w-xl text-sm text-gray-500">
+                <p id="renew-description">
+                  If you are ready to go live and public, click here
+                </p>
+              </div>
+              <div class="mt-5 sm:mt-0 sm:ml-6 sm:flex-shrink-0 sm:flex sm:items-center">
+                <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+                <button type="button" class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-pressed="false" aria-labelledby="renew-subscription-label">
+                  <span class="sr-only">Use setting</span>
+                  <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                  <span aria-hidden="true" class="translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row xl:flex-col">
+        <button @click="handlePreview" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:w-full">
+          Preview
+        </button>
+        <button @click="handleEmbedCode" type="button" class="mt-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full">
+          Embed Code
+        </button>
+      </div>
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="bg-white shadow sm:rounded-lg mt-4">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Support
+          </h3>
+          <div class="mt-2 max-w-xl text-sm text-gray-500">
+            <p>
+              If you need help with integration, contact our support at support@glancy.io
+            </p>
+          </div>
+          <div class="mt-3 text-sm">
+            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> Or come to our FAQ page <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- dialogs -->
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div v-if="show.postModal" class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <!--
+      Background overlay, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <!--
+      Modal panel, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    -->
+      <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div class="sm:flex sm:items-start">
+          <div class="mt-3 text-center  sm:text-left">
+            <div class="mt-2">
+              <!--
+  This example requires Tailwind CSS v2.0+
+
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ]
+  }
+  ```
+-->
+              <form @submit.prevent="handleSave" class="space-y-8 divide-y divide-gray-200">
+                <div class="space-y-8 divide-y divide-gray-200">
+                  <div>
+                    <div>
+                      <h3 v-if="!activePost.id" class="text-lg leading-6 font-medium text-gray-900">
+                        Add a link
+                      </h3>
+                      <h3 v-if="activePost.id" class="text-lg leading-6 font-medium text-gray-900">
+                        Edit a link
+                      </h3>
+                      <p class="mt-1 text-sm text-gray-500">
+                        This information will be displayed publicly so be careful what you share.
+                      </p>
+                    </div>
+                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                      <div class="sm:col-span-6">
+                        <label for="username" class="block text-sm font-medium text-gray-700">
+                          Title
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                          <input autofocus type="text" v-model="activePost.title" id="title" class="flex-1 border border-indigo-500 block w-full min-w-0 rounded p-2 ">
+                        </div>
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label for="username" class="block text-sm font-medium text-gray-700">
+                          Link
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                          <input type="text" v-model="activePost.link" id="link" required class="flex-1 border border-indigo-500 block w-full min-w-0 rounded p-2 ">
+                        </div>
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label for="about" class="block text-sm font-medium text-gray-700">
+                          Description (optional)
+                        </label>
+                        <div class="mt-1">
+                          <textarea id="about" name="about" rows="3" class="border border-indigo-500 p-2 block w-full  rounded-md"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-5">
+                  <div class="flex justify-end">
+                    <button @click="handleCancel()" type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      Cancel
+                    </button>
+                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- scripts-->
+  <!-- embed code dialog -->
+  <div v-if="show.embedCode" class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <!--
+      Background overlay, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <!--
+      Modal panel, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    -->
+      <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div>
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+            <!-- Heroicon name: outline/check -->
+            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-5">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              Here is your embed code
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Copy and paste this anywhere onto your website's content, preferably before the closing body tag
+              </p>
+              <textarea class="border mt-4 text-xs p-3 rounded border-indigo-400 text-gray-500 w-full h-32"><script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 sm:mt-6">
+          <button @click="handleEmbedCode" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        posts: [],
+        show: { postModal: false, embedCode: false },
+        activePost: <%= Post.skeleton.to_json %>,
+      }
+    },
+    mounted: function(){
+      this.fetchPosts();
+    },
+    methods: {
+      handleAdd(){
+        this.activePost = <%= Post.skeleton.to_json %>;
+        this.show.postModal = true;
+      },
+      handleCancel(){
+        this.show.postModal = false;
+      },
+      handleSave(){
+        this.show.postModal = false;
+        const _t = this;
+        const isNew = this.activePost.id ? false : true;
+
+        $.post('/api/posts', this.activePost, function(res){
+          if(res.post){
+            _t.show.postModal = false;
+            if(isNew){
+              _t.posts.unshift(res.post);
+            }
+          }else{
+            console.log('res', res);
+          }
+        });
+      },
+      handleEdit(post){
+        this.activePost = post;
+        this.show.postModal = true;
+      },
+      handleDelete(post){
+        const _t = this
+        $.delete(`/api/posts/${post.id}`, (res) => {
+          _t.fetchPosts();
+        })
+      },
+      fetchPosts(){
+        const _t = this;
+        $.get('/api/posts', (res) => {
+          _t.posts = res.posts;
+        })
+      },
+      handlePreview(){
+        window.open('/preview')
+      },
+      handleEmbedCode(){
+        this.show.embedCode = !this.show.embedCode;
+      }
+
+    }
+  })
+</script>
