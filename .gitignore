@@ -7,3 +7,4 @@ volumes/bundler
 log/*log
 *~
 Gemfile.lock
+node_modules
