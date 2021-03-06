@@ -1,3 +1,3 @@
 class Post < Sequel::Model
-  plugin :timestamps    
+  plugin :timestamps
 end

@@ -1,0 +1,107 @@
+<div v-if="show.popup" class="fixed z-10 inset-0 overflow-y-auto">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!--
+      Background overlay, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <!--
+      Modal panel, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    -->
+    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+      <div>
+      <h3 class="text-center">Important Updates</h3>
+        <div class="mt-3 text-left sm:mt-5">
+          <div class="mt-2">
+            <div class="flow-root mt-6">
+              <ul class="-my-5 divide-y divide-gray-200">
+                <li v-for="post in posts" class="py-5">
+                  <div class="relative focus-within:ring-2 focus-within:ring-indigo-500">
+                    <h3 class="text-sm font-semibold text-gray-800">
+                      <a :href="post.link" class="hover:underline focus:outline-none">
+                        <!-- Extend touch target to entire panel -->
+                        <span class="absolute inset-0" aria-hidden="true"></span>
+                        {{post.title}}
+                      </a>
+                    </h3>
+                    <p v-if="post.content" class="mt-1 text-sm text-gray-600 line-clamp-2">
+                      {{post.content}}
+                    </p>
+                    <%# <p class="mt-1 text-sm text-gray-600 text-xs line-clamp-2">
+                      <a class="text-xs" :href="post.link" target="_blank">{{post.link}}</a>
+                    </p> %>
+                  </div>
+
+                  <!-- action items -->
+                  <div class="hidden mt-4 flex justify-between space-x-8">
+                    <div class="flex space-x-6">
+                      <span class="inline-flex items-center text-sm">
+                        <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                          <!-- Heroicon name: solid/thumb-up -->
+                          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                          </svg>
+                          <span class="font-medium text-gray-900">293203</span>
+                          <span class="sr-only">likes</span>
+                        </button>
+                      </span>
+                      <span class="inline-flex items-center text-sm">
+                        <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                          <!-- Heroicon name: solid/chat-alt -->
+                          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                          </svg>
+                          <span class="font-medium text-gray-900">11</span>
+                          <span class="sr-only">replies</span>
+                        </button>
+                      </span>
+                      <span class="inline-flex items-center text-sm">
+                        <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                          <!-- Heroicon name: solid/eye -->
+                          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                          </svg>
+                          <span class="font-medium text-gray-900">2.7k</span>
+                          <span class="sr-only">views</span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-5 sm:mt-6">
+        <button @click="show.popup = false" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm">
+          Close
+        </button>
+      </div>
+
+      <!-- powered by -->
+      <div class="text-center mt-4 mx-auto text-xs"><a target="_blank" href="http://getglancy.com">powered by Glancy</a></div>
+    </div>
+  </div>
+</div>

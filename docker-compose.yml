@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
@@ -15,7 +15,8 @@ services:
 
   app:
     build: .
-    command: ["./bin/docker/wait-for.sh", "db:5432", "--", "./bin/docker/init.sh"]
+    command:
+      ["./bin/docker/wait-for.sh", "db:5432", "--", "./bin/docker/init.sh"]
     volumes:
       - .:/app
     ports:

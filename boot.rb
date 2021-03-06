@@ -1,41 +1,34 @@
 # load sinatra
 require 'sinatra'
 
-
 # load dotenv
 require 'dotenv/load'
-
 
 # load activesupport
 require 'active_support/all'
 
-
 # load autoloader
 require 'require_all'
-
 
 # init development
 if development?
   require 'ap' # pretty print
   require 'sinatra/reloader' # hot-reload
-  require "better_errors" # bettererror
-  require "pry"
+  require 'better_errors' # bettererror
+  require 'pry'
   require 'pry-remote'
 end
-
 
 # init omniauth
 require 'omniauth'
 require 'omniauth-facebook'
 require 'omniauth-instagram'
 
-
 # init logging
 require 'logger'
 logger = Logger.new(STDOUT)
 logger.level = Logger::DEBUG
 set :logger, logger
-
 
 # init database
 require 'sequel'
@@ -52,7 +45,6 @@ DB.extension :auto_literal_strings
 DB.pool.connection_validation_timeout = -1
 require_all 'models'
 
-
 # init mailer
 require 'pony'
 require 'liquid'
@@ -60,7 +52,7 @@ require 'liquid'
 # sequel extensions
 require 'sequel/extensions/seed'
 Sequel.extension :seed
-Sequel::Seeder.apply(DB, "db/seeds")
+Sequel::Seeder.apply(DB, 'db/seeds')
 
 # load helpers
 require_all './lib'
@@ -70,6 +62,3 @@ require './app'
 
 # load controllers
 require_all 'controllers'
-
-
-

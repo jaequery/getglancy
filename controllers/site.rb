@@ -1,34 +1,33 @@
 class SiteApp < App
-
   configure do
-    set :layout => :layout # render views/layout.erb file
+    set layout: :layout # render views/layout.erb file
   end
 
-  get "/" do
+  get '/' do
     erb :index
   end
 
-  get "/about" do
+  get '/about' do
     erb :about
   end
 
-  get "/features" do
+  get '/features' do
     erb :features
   end
 
-  get "/help" do
+  get '/help' do
     erb :help
   end
 
-  get "/picks" do
+  get '/picks' do
     erb :picks
   end
 
-  get "/pricing" do
+  get '/pricing' do
     erb :pricing
   end
 
-  post "/contact" do
+  post '/contact' do
     content_type :json
     user = User.create(params)
     binding.pry
@@ -36,33 +35,29 @@ class SiteApp < App
     return user.to_json
   end
 
-  get "/contact" do
+  get '/contact' do
     erb :contact
   end
 
-  get "/abort" do
-    users = User.where(:first_name => 'Jae').all
+  get '/abort' do
+    users = User.where(first_name: 'Jae').all
     abort
   end
 
-  get "/signin" do
-    erb :signin, :layout => :layout_plain
+  get '/signin' do
+    erb :signin, layout: :layout_plain
   end
 
-  get "/signup" do
-    erb :signup, :layout => :layout_plain
+  get '/signup' do
+    erb :signup, layout: :layout_plain
   end
 
-  get "/signout" do
+  get '/signout' do
     session.clear
-    redirect "/"
+    redirect '/'
   end
 
   get '/preview' do
-    erb :preview, :layout => :layout_plain
+    erb :preview, layout: :layout_plain
   end
-
-
-
 end
-

@@ -14,6 +14,7 @@ It was inspired heavily by Padrino, but it takes it a notch further in terms of 
 ### Setup
 
 Jasis is developed to work within the following requirements:
+
 - docker and docker-compose
 - jwilder/nginx-proxy Docker image running listening on port 80
 - dnsmasq w/ .docker extensions mapped to your docker machine's ip address
@@ -31,15 +32,15 @@ For Ubuntu:
 - install docker and docker-compose
 - dory (https://github.com/FreedomBen/dory)
 
-
 ### Install
-1) git clone https://github.com/jaequery/jasis
-2) cd jasis
-3) docker-compose up -d
-4) your site should now show up on http://jasis.docker (update VIRTUAL_HOST from docker-compose.yml)
 
+1. git clone https://github.com/jaequery/jasis
+2. cd jasis
+3. docker-compose up -d
+4. your site should now show up on http://jasis.docker (update VIRTUAL_HOST from docker-compose.yml)
 
 ### Checklist
+
 - [x] setup sinatra modular structure with sequel / postgres
 - [x] add Docker support
 - [x] add migrations
@@ -56,12 +57,12 @@ For Ubuntu:
 
 ### Some of the essential features that makes Jasis great!
 
-#### error debugging with bettererrors 
+#### error debugging with bettererrors
 
 ![screenshot](https://d3vv6lp55qjaqc.cloudfront.net/items/2w1d3G2t1T2D3A391r2E/Image%202018-03-26%20at%208.45.20%20AM.png?X-CloudApp-Visitor-Id=1367442&v=280965c1)
 
-
 #### dotenv for dev / production environment variables
+
 To set environmental variables depending on your environment, we used dotenv. You simply place a .env file at the root of the app folder.
 
 .env (base)
@@ -87,11 +88,13 @@ ENV['TWITTER_KEY']
 2. Call the email() helper function within the controllers
 
 Standard Email
+
 ```
 email({:from => 'me@email.com', :to => 'user@email.com', :subject => 'hi', :body => 'Hello'})
 ```
 
 Email through a liquid file
+
 ```
 email({:to => 'user@email.com', :subject => 'hi'}, {:file => "emails/welcome.liquid", :data => {'name' => 'john'} })
 ```

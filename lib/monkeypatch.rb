@@ -1,5 +1,5 @@
 class NilClass
-  def [](* args)
+  def [](*args)
     nil
   end
 
@@ -9,12 +9,11 @@ class NilClass
 end
 
 class Hash
-
-  def symbolize()  
+  def symbolize()
     return JSON.parse(self.to_json, symbolize_names: true) if self.present?
     return false
   end
-  
+
   def except(*keys)
     dup.except!(*keys)
   end
@@ -36,7 +35,6 @@ class Hash
 end
 
 class String
-
   def sanitize
     self.gsub(/(<.*?>)/, '')
   end
@@ -50,20 +48,20 @@ class String
     ret = self.strip
 
     #blow away apostrophes
-    ret.gsub! /['`]/,""
+    ret.gsub! /['`]/, ''
 
     # @ --> at, and & --> and
-    ret.gsub! /\s*@\s*/, " at "
-    ret.gsub! /\s*&\s*/, " and "
+    ret.gsub! /\s*@\s*/, ' at '
+    ret.gsub! /\s*&\s*/, ' and '
 
     #replace all non alphanumeric, underscore or periods with underscore
     ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'
 
     #convert double underscores to single
-    ret.gsub! /_+/,"_"
+    ret.gsub! /_+/, '_'
 
     #strip off leading/trailing underscore
-    ret.gsub! /\A[_\.]+|[_\.]+\z/,""
+    ret.gsub! /\A[_\.]+|[_\.]+\z/, ''
 
     ret
   end
@@ -71,12 +69,16 @@ class String
   def is_json?(json)
     JSON.parse(json)
     true
-  rescue
+  rescue StandardError
     false
   end
 
   def is_number?
-    true if Float(self) rescue false
+    begin
+      true if Float(self)
+    rescue StandardError
+      false
+    end
   end
 
   def to_singleline
@@ -109,11 +111,11 @@ class String
   end
 
   def underscore
-    self.gsub(/::/, '/').
-        gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').
-        gsub(/([a-z\d])([A-Z])/, '\1_\2').
-        tr("-", "_").
-        downcase
+    self
+      .gsub(/::/, '/')
+      .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+      .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+      .tr('-', '_')
+      .downcase
   end
-
 end

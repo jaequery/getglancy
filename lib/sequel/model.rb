@@ -1,12 +1,9 @@
 module Sequel
   class Model
     module ClassMethods
-
       def skeleton
         row = self.first
-        row.each{|k, v|
-          row[k] = nil
-        }
+        row.each { |k, v| row[k] = nil }
       end
 
       def save(params)
@@ -34,20 +31,19 @@ module Sequel
         end
 
         # order by
-        order_by = (params[:order_by].downcase if !params[:order_by].blank?) || 'id'
-        order_dir = (params[:order_dir].downcase if !params[:order_dir].blank?) || 'desc'
+        order_by =
+          (params[:order_by].downcase if !params[:order_by].blank?) || 'id'
+        order_dir =
+          (params[:order_dir].downcase if !params[:order_dir].blank?) || 'desc'
         q = q.reverse(order_by.to_sym) if order_dir == 'desc'
         q = q.order(order_by.to_sym) if order_dir == 'asc'
 
         # retrieve
         return q
       end
-
     end
 
     module InstanceMethods
-
     end
-
   end
 end
